@@ -1,5 +1,12 @@
 from bot.create_game_tree import create_game_tree
 from utils.database import save, load
+from flask import Flask, render_template
+
+app = Flask(__name__)
+
+@app.route("/", methods=['GET'])
+def hello_world():
+    return "Hello World!"
 
 # root = create_game_tree()
 
