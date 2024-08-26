@@ -1,0 +1,213 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;500&display=swap');
+
+$mainBlack: #151515;
+$lightBlack: #2f2f2f;
+$mainWhite: #ffffff;
+$transludeWhite: #ffffffc1;
+
+$mainBlue: #00a7de;
+$lighterBlue: rgb(187, 229, 238);
+$lightBlue: rgb(19, 193, 232);
+
+$lighterGreen: #74e465;
+$lightGreen: #38a229;
+$mainGreen: #3eca2b;
+
+$lighterRed: #ff7575;
+$lightRed: #c22e2e;
+
+button{
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+a {
+    font-size: inherit;
+    color: inherit;
+    font-weight: 600;
+}
+
+hr {
+    background-color: $lightBlack;
+    margin: 1.5em 0 1.4em;
+}
+
+.App {
+    display: flex;
+    justify-content: center;
+    color: $mainBlack;
+
+    .container {
+        margin-bottom: 8rem;
+        width: 500px;
+
+        .new-game {
+            font-size: 1rem;
+            background-color: $mainBlue;
+            padding: .2rem .6rem;
+            color: $mainWhite;
+            border-radius: 4px;
+
+            &.new-game-block {
+                display: block;
+                margin: 1em 0;
+                padding: .3rem 1.1rem;
+                font-size: 1.5em;
+            }
+        }
+        
+        .header {
+            margin-top: 4rem;
+            margin-bottom: 1.7rem;
+
+            .title {
+                font-size: 5rem;
+                margin-bottom: 0;
+                font-family: 'Josefin Sans', sans-serif;
+                letter-spacing: -2px;
+                word-spacing: -10px;
+            }
+
+            .subtitle {
+                font-size: 1.3rem;
+                margin-top: 0;
+                margin-bottom: 1rem;
+                font-weight: 400;
+            }
+
+            .navbar {
+                display: flex;
+                justify-content: space-between;
+                font-size: 1.2rem;
+                font-weight: 400;
+            }
+        }
+
+        .board {
+            $boardGap: .4rem;
+            margin-bottom: 3rem;
+            width: 100%;
+
+            .row {
+                display: flex;
+                justify-content: center;
+                margin-bottom: $boardGap;
+
+                .square {
+                    display: block;
+                    text-align: center;
+                    padding: .1em;
+                    border-radius: 7px;
+                    font-size: 5em;
+                    width: 100%;
+                    height: 150px;
+                    margin-left: $boardGap;
+                    
+                    &.numberSquare {
+                        background-color: $lighterBlue;
+                        color: $lightBlue;
+                    }
+
+                    &.XSquare {
+                        background-color: $lighterGreen;
+                        color: $lightGreen;
+                    }
+
+                    &.OSquare {
+                        background-color: $lighterRed;
+                        color: $lightRed;
+                    }
+
+                    &:first-child{
+                        margin-left: 0; 
+                    }
+                }
+
+            }
+
+            .win-board {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+
+                position: absolute;
+                width: 500px;
+                height: 463px;
+                z-index: 2;
+
+                background: $transludeWhite;
+
+                transition: opacity 1s;
+
+                .win-text {
+                    font-size: 3.5em;
+                    text-align: center;
+                    font-weight: 600;
+                }
+
+                &.hidden {
+                    opacity: 0%;
+                    visibility: hidden;
+                    display: none;
+                }
+            }
+
+            .tie-board {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+
+                position: absolute;
+                width: 500px;
+                height: 463px;
+                z-index: 2;
+
+                background: $transludeWhite;
+
+                transition: opacity 1s;
+
+                .tie-text {
+                    font-size: 3.5em;
+                    text-align: center;
+                    font-weight: 600;
+                }
+
+                &.hidden {
+                    opacity: 0%;
+                    visibility: hidden;
+                    display: none;
+                }
+            }
+        }
+
+        .timeline {
+            margin-bottom: 4em;
+            .current-history {
+                background-color: $mainGreen;
+                padding: .2em .4em;
+                border-radius: 4px;
+                color: $mainWhite;
+            }
+            .history-button {
+                font-size: 1rem;
+                // display: inline-block;
+            }
+        }
+
+        .footer {
+            font-size: 1.2em;
+
+            .description {
+                line-height: 170%;
+            }
+
+            .last-links {
+                text-align: center;
+            }
+        }
+    }
+}
+

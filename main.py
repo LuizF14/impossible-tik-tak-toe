@@ -1,6 +1,6 @@
 from bot.create_game_tree import create_game_tree
 from utils.database import save, load
-from flask import Flask, render_template
+from flask import Flask
 
 app = Flask(__name__)
 
