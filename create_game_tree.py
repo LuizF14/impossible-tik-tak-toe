@@ -7,6 +7,15 @@ class TreeNode():
         self.children_nodes = []
         self.player = -1
         self.score = 0
+    def toJson(self):
+        json = {
+            "table": self.table,
+            "children": [],
+            "player": self.player,
+        }
+        for i in self.children_nodes:
+            json["children"].append(i.toJson())
+        return json
 
 def is_game_end(table):
     end_table = [[1,1,1,0,0,0,0,0,0],

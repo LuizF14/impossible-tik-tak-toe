@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import './App.scss';
+import gameTree from './data.json'
 
 const BOARD_LENGTH = 3;
 const NewGameContext = React.createContext();
+let gameNode = gameTree;
 
 function calculateWinner (squares) {
   const lines = [
@@ -24,6 +26,31 @@ function calculateWinner (squares) {
   return null;
 }
 
+function convertToTable(board) {
+  return board.map(square =>{
+    if (square === 'X') {
+      return -1;
+    } else if (square === 'O') {
+      return 1;
+    } else {
+      return 0;
+    }
+  });
+}
+
+function convertToBoard(table) {
+  return table.map((square, index) => {
+    if (square === 1) {
+      return 'O';
+    } else if (square === -1) {
+      return 'X';
+    } else {
+      return index + 1;
+    }
+  });
+}
+
+
 function gameHasTied (squares) {
   const numberSquares = squares.filter(el => typeof el === 'number');
   if (numberSquares.length === 0) return true;
@@ -39,6 +66,15 @@ export default class App extends Component {
       squares: Array(Math.pow(BOARD_LENGTH, 2)).fill(null).map((item, index) => index + 1),
     };
   }
+
+  botFirstPlay() {
+    gameNode = gameTree.children[0];
+    const startingBoard = convertToBoard(gameNode.table);
+    this.setState({
+      squares: startingBoard
+    });
+  }
+
   squareClick(squareKey, nextFn) {
     const squares = this.state.squares;
     const XisNext = this.state.XisNext;
@@ -54,16 +90,41 @@ export default class App extends Component {
     this.squareClick(squareKey, this.botClick);
   }
 
+  botClick() {
+    const {squares} = this.state;
+    const children = gameNode.children;
+
+    let playerTable = convertToTable(squares);
+
+    for (let i = 0; i < children.length; i++) {
+      if (children[i].table.every((value, index) => value === playerTable[index])) {
+        gameNode = children[i].children[0];
+        break;
+      }
+    }
+
+    let updatedSquares = convertToBoard(gameNode.table);
+    
+    this.setState({ 
+      squares: updatedSquares,
+      XisNext: true
+     });
+  }
+
   clearGame () {
     this.setState({
       squares: Array(Math.pow(BOARD_LENGTH, 2)).fill(null).map((item, index) => index + 1),
       XisNext: true,
-    });
+    }, () => {this.botFirstPlay()});
+    
+  }
+
+  componentDidMount() {
+    this.botFirstPlay();
   }
 
   render() {
     const squares = this.state.squares;
-
     return (
       <div className='App'>
         <div className="container">

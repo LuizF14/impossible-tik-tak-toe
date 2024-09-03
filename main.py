@@ -1,14 +1,9 @@
-from bot.create_game_tree import create_game_tree
-from utils.database import save, load
-from flask import Flask
-
-app = Flask(__name__)
-
-@app.route("/", methods=['GET'])
-def hello_world():
-    return "Hello World!"
-
+from create_game_tree import create_game_tree
+from database import save
 # root = create_game_tree()
+
+root = create_game_tree()
+save(root)
 
 # def print_rec(root):
 #     print(f'{root.table} - {root.score}')
@@ -17,7 +12,6 @@ def hello_world():
 #     print_rec(root.children_nodes[0])
 
 # print_rec(root)
-# save(root)
 # root = load('data.pickle')
 # print(root.table)
 
