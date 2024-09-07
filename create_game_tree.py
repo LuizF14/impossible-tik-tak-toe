@@ -2,10 +2,10 @@ TABLE_LENGTH = 9
 game_table = [0] * TABLE_LENGTH
 
 class TreeNode():
-    def __init__(self, table):
+    def __init__(self, table, player = -1):
         self.table = table
         self.children_nodes = []
-        self.player = -1
+        self.player = player
         self.score = 0
     def toJson(self):
         json = {
@@ -68,12 +68,14 @@ def tree_rec(root):
                 for j in child_node.children_nodes:
                     child_node.score += j.score
             else: child_node.score = is_game_end(child_node.table)
-    
+
+    if children_nodes == []:
+        return
     if root.player == -1:
         root.children_nodes.append(get_largest_score(children_nodes))
     else: root.children_nodes = children_nodes
 
-def create_game_tree():
-    root = TreeNode(game_table)
+def create_game_tree(player):
+    root = TreeNode(game_table, player)
     tree_rec(root)
     return root

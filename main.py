@@ -2,7 +2,10 @@ from create_game_tree import create_game_tree
 from database import save
 # root = create_game_tree()
 
-root = create_game_tree()
+root = create_game_tree(1)
+save(root)
+
+root = create_game_tree(-1)
 save(root)
 
 # def print_rec(root):

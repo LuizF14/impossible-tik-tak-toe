@@ -15,6 +15,7 @@ $mainGreen: #3eca2b;
 
 $lighterRed: #ff7575;
 $lightRed: #c22e2e;
+$mainRed: #dd1832;
 
 button{
     background: none;
@@ -42,20 +43,42 @@ hr {
         margin-bottom: 8rem;
         width: 500px;
 
-        .new-game {
-            font-size: 1rem;
-            background-color: $mainBlue;
-            padding: .2rem .6rem;
-            color: $mainWhite;
-            border-radius: 4px;
+        .left-nav {
+            display: flex;
+            align-items: center;
+            .new-game {
+                font-size: 1rem;
+                background-color: $mainBlue;
+                padding: .2rem .6rem;
+                color: $mainWhite;
+                border-radius: 4px;
+    
+                &.new-game-block {
+                    display: block;
+                    margin: 1em 0;
+                    padding: .3rem 1.1rem;
+                    font-size: 1.5em;
+                }
+            }
+    
+            .first-player {
+                border-radius: 4px;
+                padding: .11rem .6rem;
+                margin-right: .3rem;
+                color: $mainWhite;
+                font-weight: 900;
+                font-size: 1.1rem;
+            }
 
-            &.new-game-block {
-                display: block;
-                margin: 1em 0;
-                padding: .3rem 1.1rem;
-                font-size: 1.5em;
+            .red {
+                background-color: $mainRed;
+            }
+
+            .green {
+                background-color: $mainGreen;
             }
         }
+
         
         .header {
             margin-top: 4rem;
