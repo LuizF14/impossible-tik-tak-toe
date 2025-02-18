@@ -1,20 +1,8 @@
 from create_game_tree import create_game_tree
 from database import save
-# root = create_game_tree()
+from test import test_performance
 
-root = create_game_tree(1)
+root = create_game_tree()
+test_performance(root)
+
 save(root)
-
-root = create_game_tree(-1)
-save(root)
-
-# def print_rec(root):
-#     print(f'{root.table} - {root.score}')
-#     if root.children_nodes == []: 
-#         return
-#     print_rec(root.children_nodes[0])
-
-# print_rec(root)
-# root = load('data.pickle')
-# print(root.table)
-

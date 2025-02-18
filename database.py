@@ -16,7 +16,6 @@
 
 import json
 
-
 def save(obj):
     try: 
         if obj.player == 1:
