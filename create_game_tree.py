@@ -114,10 +114,13 @@ def filter_game_tree(root):
     filter_rec(filtered_tree, root)
     return filtered_tree
 
-def create_game_tree():
+def create_game_tree(max_first_player):
     root_table = ['-'] * TABLE_LENGTH
-    root = TreeNode(root_table, player='O')
-    tree_rec(root, depth=0, isMax=True)
+    if max_first_player: 
+        root = TreeNode(root_table, player='O')
+    else:
+        root = TreeNode(root_table, player='X')
+    tree_rec(root, depth=0, isMax=max_first_player)
     return root
 
 # 35998025129
