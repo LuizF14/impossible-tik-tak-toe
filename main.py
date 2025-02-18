@@ -1,8 +1,9 @@
-from create_game_tree import create_game_tree
+from create_game_tree import create_game_tree, filter_game_tree
 from database import save
 from test import test_performance
 
 root = create_game_tree()
-test_performance(root)
+filtered_root = filter_game_tree(root)
+# test_performance(root)
 
 save(root)
