@@ -1,5 +1,8 @@
 TABLE_LENGTH = 9
 
+# 'B' stands for Bot
+# 'P' stands for Player
+
 class TreeNode():
     def __init__(self, table, player = ''):
         self.children = []
@@ -36,17 +39,17 @@ def evaluate_score(table):
     for i in end_table:
         status = 0
         for j in range(9):
-            if i[j] == 1 and table[j] == 'X':
+            if i[j] == 1 and table[j] == 'B':
                 status = 10
-            elif i[j] == 1 and table[j] != 'X':
+            elif i[j] == 1 and table[j] != 'B':
                 status = 0
                 break
         if status == 10: return status
 
         for j in range(9):
-            if i[j] == 1 and table[j] == 'O':
+            if i[j] == 1 and table[j] == 'P':
                 status = -10
-            elif i[j] == 1 and table[j] != 'O':
+            elif i[j] == 1 and table[j] != 'P':
                 status = 0
                 break
         if status == -10: return status
@@ -71,7 +74,7 @@ def tree_rec(root, depth, isMax):
         best_score = -1000
         for i, cell in enumerate(root.table): 
             if cell == '-': 
-                child_node = TreeNode(root.table.copy(), player='X')
+                child_node = TreeNode(root.table.copy(), player='B')
                 child_node.table[i] = child_node.player
 
                 rec_score = tree_rec(child_node, depth+1, False)
@@ -83,7 +86,7 @@ def tree_rec(root, depth, isMax):
         best_score = 1000
         for i, cell in enumerate(root.table): 
             if cell == '-': 
-                child_node = TreeNode(root.table.copy(), player='O')
+                child_node = TreeNode(root.table.copy(), player='P')
                 child_node.table[i] = child_node.player
 
                 rec_score = tree_rec(child_node, depth+1, True)
@@ -96,12 +99,12 @@ def filter_rec(filtered, root):
     if root.children == []:
         return
 
-    if root.player == 'O': 
+    if root.player == 'P': 
         best_child = max(root.children, key=lambda x: x.score)
         filtered_child = best_child.copy_node()
         filtered.children.append(filtered_child)
         filter_rec(filtered_child, best_child)
-    elif root.player == 'X':
+    elif root.player == 'B':
         for i in root.children:
             filtered_child = i.copy_node()
             filtered.children.append(filtered_child)
@@ -117,9 +120,9 @@ def filter_game_tree(root):
 def create_game_tree(max_first_player):
     root_table = ['-'] * TABLE_LENGTH
     if max_first_player: 
-        root = TreeNode(root_table, player='O')
+        root = TreeNode(root_table, player='P')
     else:
-        root = TreeNode(root_table, player='X')
+        root = TreeNode(root_table, player='B')
     tree_rec(root, depth=0, isMax=max_first_player)
     return root
 

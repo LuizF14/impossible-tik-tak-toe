@@ -163,17 +163,26 @@ hr {
                 background: $transludeWhite;
 
                 transition: opacity 1s;
+                
+                &.player-win{
+                    
+                }
 
-                .win-text {
-                    font-size: 3.5em;
-                    text-align: center;
-                    font-weight: 600;
+                &.bot-win{
+                    
                 }
 
                 &.hidden {
                     opacity: 0%;
                     visibility: hidden;
                     display: none;
+                }
+
+                .win-text {
+                    font-size: 3.5em;
+                    text-align: center;
+                    font-weight: 600;
+                    margin-bottom: .4em;
                 }
             }
 
@@ -203,20 +212,6 @@ hr {
                     visibility: hidden;
                     display: none;
                 }
-            }
-        }
-
-        .timeline {
-            margin-bottom: 4em;
-            .current-history {
-                background-color: $mainGreen;
-                padding: .2em .4em;
-                border-radius: 4px;
-                color: $mainWhite;
-            }
-            .history-button {
-                font-size: 1rem;
-                // display: inline-block;
             }
         }
 

@@ -2,11 +2,11 @@ import json
 
 def save(obj):
     try: 
-        if obj.player == 'O':
-            with open("./client/src/dataX.json", "w") as f:
+        if obj.children[0].player == 'B':
+            with open("./client/src/dataB.json", "w") as f:
                 json.dump(obj.toJson(), f)
-        elif obj.player == 'X': 
-            with open("./client/src/dataO.json", "w") as f:
+        elif obj.children[0].player == 'P': 
+            with open("./client/src/dataP.json", "w") as f:
                 json.dump(obj.toJson(), f)
     except Exception as ex:
         print("Error", ex)
