@@ -1,4 +1,4 @@
-import {Component} from "react";
+import {Component, createRef} from "react";
 import { calculateWinner } from "./utils";
 
 let BOARD_LENGTH = 3;
@@ -37,13 +37,49 @@ export class Navbar extends Component {
 }
   
 export class NewGame extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            isOpen: false
+        };
+        this.dropdownRef = createRef();
+    }
+    toggleDropdown = () => {
+        this.setState({
+            isOpen: !this.state.isOpen
+        });
+    }
+    clickOutside = event => {
+        if (this.dropdownRef.current && !this.dropdownRef.current.contains(event.target)) {
+            this.setState({ isOpen: false });
+        }
+    }
+    componentDidMount() {
+        document.addEventListener("mousedown", this.clickOutside);
+    }
+    componentWillUnmount() {
+        document.removeEventListener("mousedown", this.handleClickOutside);
+    }
     render() {
         const {firstPlayer, handleNewGame} = this.props;
+        const {isOpen} = this.state;
         return (
-        <select value={firstPlayer} onChange={e => handleNewGame(e.target.value)} onClick={e => handleNewGame(e.target.value)}>
-            <option value='P'>Play as X</option>
-            <option value='B'>Play as O</option>
-        </select>
+        <div className="dropdown-container" ref={this.dropdownRef}>
+            <div className="flex">
+                <button className="button-main" onClick={() => handleNewGame(firstPlayer)}>{firstPlayer === 'P' ? 'Play as X' : 'Play as O'}</button>
+                <button className="button-arrow" onClick={this.toggleDropdown}>
+                    <img src="https://img.icons8.com/?size=100&id=85502&format=png&color=FFFFFF" alt="dropdown arror"/>
+                </button>
+            </div>
+            <div>
+                {isOpen && (
+                    <ul className="dropdown-menu">
+                        <li onClick={() => {handleNewGame('P'); this.toggleDropdown()}} className="dropdown-item">Play as X</li>
+                        <li onClick={() => {handleNewGame('B'); this.toggleDropdown()}} className="dropdown-item">Play as O</li>
+                    </ul>
+                )}
+            </div>
+        </div>
         )
     }
 }
@@ -71,8 +107,8 @@ export class Board extends Component {
     render() {
         const {firstPlayer, handleNewGame, squares} = this.props;
         const winStatus = calculateWinner(squares);
-        const hasPlayerWon = (winStatus == 'X' && firstPlayer == 'P' || winStatus == 'O' && firstPlayer == 'B');
-        const hasBotWon = (winStatus == 'O' && firstPlayer == 'P' || winStatus == 'X' && firstPlayer == 'B'); 
+        const hasPlayerWon = ((winStatus === 'X' && firstPlayer === 'P') || (winStatus === 'O' && firstPlayer === 'B'));
+        const hasBotWon = ((winStatus === 'O' && firstPlayer === 'P') || (winStatus === 'X' && firstPlayer === 'B')); 
         const hasGameTied = this.props.gameHasTied() && !winStatus ? '' : ' hidden';
 
         return (

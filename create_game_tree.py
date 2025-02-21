@@ -79,7 +79,7 @@ def tree_rec(root, depth, isMax):
 
                 rec_score = tree_rec(child_node, depth+1, False)
                 best_score = max(best_score, rec_score)
-                child_node.score = best_score
+                child_node.score = best_score - depth
                 root.children.append(child_node)
         return best_score
     else: 
@@ -91,7 +91,7 @@ def tree_rec(root, depth, isMax):
 
                 rec_score = tree_rec(child_node, depth+1, True)
                 best_score = min(best_score, rec_score)
-                child_node.score = best_score
+                child_node.score = best_score - depth
                 root.children.append(child_node)
         return best_score
 

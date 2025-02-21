@@ -38,6 +38,15 @@ hr {
     display: flex;
     justify-content: center;
     color: $mainBlack;
+    
+    .new-game {
+        font-size: 1rem;
+        background-color: $mainBlue;
+        padding: .2rem .6rem;
+        color: $mainWhite;
+        border-radius: 4px;
+        cursor: pointer;
+    }
 
     .container {
         margin-bottom: 8rem;
@@ -46,20 +55,6 @@ hr {
         .left-nav {
             display: flex;
             align-items: center;
-            .new-game {
-                font-size: 1rem;
-                background-color: $mainBlue;
-                padding: .2rem .6rem;
-                color: $mainWhite;
-                border-radius: 4px;
-    
-                &.new-game-block {
-                    display: block;
-                    margin: 1em 0;
-                    padding: .3rem 1.1rem;
-                    font-size: 1.5em;
-                }
-            }
     
             .first-player {
                 border-radius: 4px;
@@ -205,6 +200,7 @@ hr {
                     font-size: 3.5em;
                     text-align: center;
                     font-weight: 600;
+                    margin-bottom: .4em;
                 }
 
                 &.hidden {
@@ -229,3 +225,62 @@ hr {
     }
 }
 
+
+.dropdown-container {
+    position: relative;
+    display: inline-block;
+    .button-main {
+        background-color: #3b82f6;
+        color: white;
+        padding: 8px 16px;
+        border: none;
+        border-top-left-radius: 8px;
+        border-bottom-left-radius: 8px;
+        border-right: solid #9bb9eb 1px;
+        cursor: pointer;
+    }
+
+    .button-arrow {
+        background-color: #3b82f6;
+        color: white;
+        padding: 8px 12px;
+        border: none;
+        border-top-right-radius: 8px;
+        border-bottom-right-radius: 8px;
+        cursor: pointer;
+
+        img {
+            width: .9em;
+            height: .9em;
+        }
+    }
+
+    .button-main:hover, .button-arrow:hover {
+        background-color: #1d4ed8;
+    }
+
+    .dropdown-menu {
+        list-style: none;
+        position: absolute;
+        left: 0;
+        margin-top: 4px;
+        width: 100%;
+        background: white;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        z-index: 10;
+        padding-left: 0;
+    }
+
+    .dropdown-item {
+        padding: 8px 16px;
+        font-size: .8em;
+        cursor: pointer;
+    }
+
+    .dropdown-item:hover {
+        background: #f3f4f6;
+    }
+}
+  
